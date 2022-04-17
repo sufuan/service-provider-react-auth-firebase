@@ -9,6 +9,7 @@ import Services from './component/Services/Services'
 import Blog from './component/Blog/Blog'
 import About from './component/About/About'
 import Register from './Auth/Register/Register';
+import Footer from './component/Footer/Footer';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path='/login' element={<LOgin></LOgin>}></Route>
         <Route path='/register' element={<Register></Register>}> </Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 };
