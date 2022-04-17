@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
+import googlelogo from '../../assets/google.png'
 
 const Register = () => {
 
@@ -115,9 +116,9 @@ const Register = () => {
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
 
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign up to your account</h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Or{' '}
+            
 
           </p>
         </div>
@@ -226,18 +227,28 @@ const Register = () => {
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with Google</span>
-                   <h1>google</h1>
+                   <img className='w-50 h-5' src={googlelogo} alt="" />
                   </button>
                 </div>
 
                 <div>
-                  <a
-                    href="/"
+                  <button  disabled
+
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
-                    <span className="sr-only">Sign in with GitHub</span>
-                 <h1>Github</h1>
-                  </a>
+                    <span className="sr-only">Sign in with Gitbub</span>
+                    <h1>Github</h1>
+                  </button>
+                </div>
+
+                <div>
+                  <button disabled
+
+                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                  >
+                    <span className="sr-only">Sign in with facebook</span>
+                    <h1>facebook</h1>
+                  </button>
                 </div>
 
 

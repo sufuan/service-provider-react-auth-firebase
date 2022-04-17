@@ -2,103 +2,103 @@ import React, { useEffect, useState } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
-
+import googlelogo from '../../assets/google.png'
 
 const LOgin = () => {
 
   const [userInfo, setUserinfo] = useState({
-    email:'',
-    password:'',
+    email: '',
+    password: '',
   })
   const [errors, setErrors] = useState({
-    emailError:'',
-    passError:'',
-    generaleError:'',
+    emailError: '',
+    passError: '',
+    generaleError: '',
   })
   const [signInWithEmailAndPassword, user, hookerror,] = useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
-  const handleEmail=e=>{
+  const handleEmail = e => {
 
-    if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)){
-      setUserinfo({...userInfo, email:e.target.value})
-     setErrors({...errors,emailError:''})
-     
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)) {
+      setUserinfo({ ...userInfo, email: e.target.value })
+      setErrors({ ...errors, emailError: '' })
+
     }
-    else{
-      setErrors({...errors,emailError:'invalid email'})
-      setUserinfo({...userInfo,email:''})
+    else {
+      setErrors({ ...errors, emailError: 'invalid email' })
+      setUserinfo({ ...userInfo, email: '' })
     }
- 
+
   }
-  const handlePassword=e=>{
-    if(/.{6,}/.test(e.target.value)){
-     setUserinfo({...userInfo,password:e.target.value})
-     setErrors({...errors ,passError:''})
+  const handlePassword = e => {
+    if (/.{6,}/.test(e.target.value)) {
+      setUserinfo({ ...userInfo, password: e.target.value })
+      setErrors({ ...errors, passError: '' })
     }
-    else{
+    else {
       // error 
-      setErrors({...errors, passError:'password should be 6 char'})
-      setUserinfo({...userInfo,password:''})
+      setErrors({ ...errors, passError: 'password should be 6 char' })
+      setUserinfo({ ...userInfo, password: '' })
     }
-   
+
   }
-  const handleLogin=(e)=>{
-     e.preventDefault()
-      signInWithEmailAndPassword(userInfo.email,userInfo.password)
+  const handleLogin = (e) => {
+    e.preventDefault()
+    signInWithEmailAndPassword(userInfo.email, userInfo.password)
   }
 
-  useEffect(()=>{
-  
-  if(hookerror){
-    switch(hookerror.code){
-      case 'auth/invalid-email':
-      setErrors({...errors, generaleError:'invalid-email'})
-      break
-      case 'auth/invalid-password':
-        setErrors({...errors, generaleError:'invalid-password'})
-        break
+  useEffect(() => {
+
+    if (hookerror) {
+      switch (hookerror.code) {
+        case 'auth/invalid-email':
+          setErrors({ ...errors, generaleError: 'invalid-email' })
+          break
+        case 'auth/invalid-password':
+          setErrors({ ...errors, generaleError: 'invalid-password' })
+          break
         case 'auth/user-not-found':
-          setErrors({...errors, generaleError:'user not found'})
-          break  
-      default:
-        setErrors({...errors, generaleError:'something went wrong'})
-      break
+          setErrors({ ...errors, generaleError: 'user not found' })
+          break
+        default:
+          setErrors({ ...errors, generaleError: 'something went wrong' })
+          break
+      }
+
+
+
+      console.log(hookerror)
+      // setErrors({...errors, generaleError:'something went wrong'})
     }
+  }, [hookerror])
 
 
-
-    console.log(hookerror)
-    // setErrors({...errors, generaleError:'something went wrong'})
-  }
-  },[hookerror])
-
-
-  const location=useLocation()
-  const navigate=useNavigate()
+  const location = useLocation()
+  const navigate = useNavigate()
   const from = location?.state?.from?.pathname || '/'
 
-  
-  useEffect(()=>{
-    if(user){
-      navigate(from)
-    }
-  },[user])
 
-  useEffect(()=>{
-    if(googleUser){
+  useEffect(() => {
+    if (user) {
       navigate(from)
     }
-  },[googleUser])
-    return (
-        <>
-    
+  }, [user])
+
+  useEffect(() => {
+    if (googleUser) {
+      navigate(from)
+    }
+  }, [googleUser])
+  return (
+    <>
+
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        
+
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-      
-           
+
+
           </p>
         </div>
 
@@ -111,7 +111,7 @@ const LOgin = () => {
                 </label>
                 <div className="mt-1">
                   <input
-                   onChange={handleEmail}
+                    onChange={handleEmail}
                     id="email"
                     name="email"
                     type="email"
@@ -120,7 +120,7 @@ const LOgin = () => {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-               {errors?.emailError &&  <p className='text-red-600'>{errors.emailError}</p>}
+                {errors?.emailError && <p className='text-red-600'>{errors.emailError}</p>}
               </div>
 
               <div>
@@ -129,7 +129,7 @@ const LOgin = () => {
                 </label>
                 <div className="mt-1">
                   <input
-                  onChange={handlePassword}
+                    onChange={handlePassword}
                     id="password"
                     name="password"
                     type="password"
@@ -139,13 +139,13 @@ const LOgin = () => {
                   />
                 </div>
               </div>
-              
-              {errors.generaleError && <p className='text-red-600'>{errors.generaleError}</p> }
+
+              {errors.generaleError && <p className='text-red-600'>{errors.generaleError}</p>}
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                 <Link to='/register'>  <h1 className=' text-medium font-medium text-indigo-600 hover:text-indigo-500'>Create new accout  </h1></Link>
-              
+                  <Link to='/register'>  <h1 className=' text-medium font-medium text-indigo-600 hover:text-indigo-500'>Create new accout  </h1></Link>
+
                 </div>
 
                 <div className="text-sm">
@@ -164,7 +164,7 @@ const LOgin = () => {
                 </button>
               </div>
 
-            
+
             </form>
 
             <div className="mt-6">
@@ -180,22 +180,43 @@ const LOgin = () => {
               <div className="mt-6 grid grid-cols-3 gap-3">
                 <div>
                   <button onClick={() => signInWithGoogle()}
-                  
+
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with Google</span>
-                       <h1>google</h1>
+                    <img className='w-50 h-5' src={googlelogo} alt="" />
+
                   </button>
                 </div>
 
-           
+                <div>
+                  <button  disabled
+
+                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                  >
+                    <span className="sr-only">Sign in with Gitbub</span>
+                    <h1>Github</h1>
+                  </button>
+                </div>
+
+                <div>
+                  <button disabled
+
+                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                  >
+                    <span className="sr-only">Sign in with facebook</span>
+                    <h1>facebook</h1>
+                  </button>
+                </div>
+
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </>
-    );
+  );
 };
 
 export default LOgin;
