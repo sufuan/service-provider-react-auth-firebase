@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 
 const LOgin = () => {
@@ -131,22 +131,14 @@ const LOgin = () => {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                {errors?.passError && <p>{errors.passError}</p> }
               </div>
               
-              {errors.generaleError && <p>{errors.generaleError}</p> }
+              {errors.generaleError && <p className='text-red-600'>{errors.generaleError}</p> }
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                  />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                    Remember me
-                  </label>
+                 <Link to='/register'>  <h1 className=' text-medium font-medium text-indigo-600 hover:text-indigo-500'>Create new accout  </h1></Link>
+              
                 </div>
 
                 <div className="text-sm">

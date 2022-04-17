@@ -8,6 +8,7 @@ import Home from './component/Home page/Home';
 import Services from './component/Services/Services'
 import Blog from './component/Blog/Blog'
 import About from './component/About/About'
+import Register from './Auth/Register/Register';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/blog' element={<Blog></Blog>}></Route>
         <Route path='/about' element={<About></About>}> </Route>
         <Route path='/login' element={<LOgin></LOgin>}></Route>
+        <Route path='/register' element={<Register></Register>}> </Route>
       </Routes>
     </div>
   );

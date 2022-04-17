@@ -26,9 +26,13 @@
 
 
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink } from 'react-router-dom';
+import { auth } from '../../firebase';
 
 const Header = () => {
+    const [user, loading, error] = useAuthState(auth);
+
     return (
         <div className='sticky top-0 bg-white px-12 py-2 flex justify-center md:justify-between'>
             <div className='hidden md:block' >
