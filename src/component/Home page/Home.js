@@ -1,9 +1,6 @@
 import React from 'react';
 import dentist from '../../assets/dentist.png'
-import icon1 from '../../assets/icon-1.png'
-import icon2 from '../../assets/icon-2.png'
-import icon3 from '../../assets/icon-3.png'
-import icon4 from '../../assets/icon-4.png'
+
 import Services from '../Services/Services';
 
 const Home = () => {
