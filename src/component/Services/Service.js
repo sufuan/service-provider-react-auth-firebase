@@ -16,7 +16,7 @@ const navigateTODetails=id=>{
                         <img className=' h-30 mx-auto -full object-cover' src={picture} alt="profile" />
                     </div>
                     <div className="flex flex-col justify-end py-2">
-                        <p className=' text-base'>{name}</p>
+                        <p className=' text-lg'>{name}</p>
                         <p className='text-gray-600 text-sm mt-1 ' >{description}/5</p>
                         <p className=' '>price :{price}</p>
                         <button onClick={()=>navigateTODetails(id)} className='rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white'>Book now</button>
