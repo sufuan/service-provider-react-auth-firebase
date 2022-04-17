@@ -17,6 +17,9 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/services' element={<Services></Services>}></Route>
+        <Route path='/services/:ServiceId' element={<RequireAuth>
+          <Checkout></Checkout>
+        </RequireAuth>}></Route>
      
       <Route path='/checkout' element={<RequireAuth>
         <Checkout></Checkout>
