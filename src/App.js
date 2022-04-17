@@ -10,6 +10,7 @@ import Blog from './component/Blog/Blog'
 import About from './component/About/About'
 import Register from './Auth/Register/Register';
 import Footer from './component/Footer/Footer';
+import NotFound from './component/NotFound/NotFound';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path='/about' element={<About></About>}> </Route>
         <Route path='/login' element={<LOgin></LOgin>}></Route>
         <Route path='/register' element={<Register></Register>}> </Route>
+        <Route path='*' element={<NotFound></NotFound>}> </Route>
       </Routes>
       <Footer></Footer>
     </div>
