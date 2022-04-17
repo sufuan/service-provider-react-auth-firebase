@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
+
 
 const LOgin = () => {
 
@@ -14,8 +15,8 @@ const LOgin = () => {
     passError:'',
     generaleError:'',
   })
-  const [signInWithEmailAndPassword, user, loading, hookerror,] = useSignInWithEmailAndPassword(auth);
-
+  const [signInWithEmailAndPassword, user, hookerror,] = useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
   const handleEmail=e=>{
 
     if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)){
@@ -82,6 +83,12 @@ const LOgin = () => {
       navigate(from)
     }
   },[user])
+
+  useEffect(()=>{
+    if(googleUser){
+      navigate(from)
+    }
+  },[googleUser])
     return (
         <>
     
@@ -172,13 +179,13 @@ const LOgin = () => {
 
               <div className="mt-6 grid grid-cols-3 gap-3">
                 <div>
-                  <a
-                    href="/"
+                  <button onClick={() => signInWithGoogle()}
+                  
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with Google</span>
                        <h1>google</h1>
-                  </a>
+                  </button>
                 </div>
 
            
