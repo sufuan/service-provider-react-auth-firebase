@@ -193,7 +193,7 @@ const Register = () => {
               </div>
               {/* {errors?.passError && <p>{errors.passError}</p>} */}
 
-              {errors.generaleError && <p>{errors.generaleError}</p>}
+              {errors.generaleError && <p className='text-red-600 text-sm'>{errors.generaleError}</p>}
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
