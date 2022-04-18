@@ -1,18 +1,4 @@
-// import React from 'react';
-// import { useParams } from 'react-router-dom';
 
-// const Checkout = () => {
-
-//     const {ServiceId}=useParams()
-//     console.log(ServiceId);
-//     return (
-//         <div>
-//                 this is Checkout
-//         </div>
-//     );
-// };
-
-// export default Checkout;
 
 
 import React, { useState } from 'react';
@@ -34,7 +20,7 @@ const Checkout = () => {
 
     return (
         <div>
-           <p className='font-semibold p-5 text-center'> you have choose service no {ServiceId}</p>
+           <p className='font-semibold p-5 text-center'> you have chosen service no {ServiceId}</p>
             {<p className='text-4xl text-center text-green-600 py-10'>{showMsg}</p>}
             <section
                 aria-labelledby="payment-and-shipping-heading"
