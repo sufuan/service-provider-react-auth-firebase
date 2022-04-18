@@ -316,11 +316,25 @@ const Register = () => {
     }
     else {
       // error 
-      // setErrors({...errors, passError:'password should be 6 char'})
+      setErrors({...errors, passError:'password should be 6 char'})
       setUserinfo({ ...userInfo, password: '' })
     }
 
   }
+
+  const handleConfirmPassword = e => {
+    if (e.target.value===userInfo.password) {
+      setUserinfo({ ...userInfo, confirmPassword: e.target.value })
+      setErrors({ ...errors, passError: '' })
+    }
+    else {
+      // error 
+      setErrors({...errors, passError:'password dont match'})
+      setUserinfo({ ...userInfo, confirmPassword: '' })
+    }
+
+  }
+
   const handleLogin = (e) => {
     e.preventDefault()
     createUserWithEmailAndPassword(userInfo.email, userInfo.password)
@@ -336,15 +350,16 @@ const Register = () => {
         case 'auth/invalid-password':
           setErrors({ ...errors, generaleError: 'invalid-password' })
           break
-        case 'auth/user-not-found':
-          setErrors({ ...errors, generaleError: 'user not found' })
+        case 'auth/email-already-in-use':
+          setErrors({ ...errors, generaleError: 'email is already registered' })
           break
-        case 'auth/wrong-password':
-          setErrors({ ...errors, generaleError: 'wrong password' })
-          break
+       
         case 'auth/internal-error':
           setErrors({ ...errors, generaleError: 'internal error' })
           break
+          case 'auth/network-request-failed':
+            setErrors({ ...errors, generaleError: 'Network error' })
+            break
         default:
           setErrors({ ...errors, generaleError: 'something went wrong' })
           break
@@ -407,7 +422,7 @@ const Register = () => {
                 </div>
                 {errors?.emailError && <p className='text-red-600'>{errors.emailError}</p>}
               </div>
-
+                 {/* input password  */}
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   Password
@@ -415,8 +430,7 @@ const Register = () => {
                 <div className="mt-1">
                   <input
                     onChange={handlePassword}
-                    id="password"
-                    name="password"
+                   
                     type="password"
                     autoComplete="current-password"
                     required
@@ -425,6 +439,26 @@ const Register = () => {
                 </div>
                 {errors?.passError && <p>{errors.passError}</p>}
               </div>
+              
+                   {/* confim password  */}
+
+                   <div>
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                Confim Password
+                </label>
+                <div className="mt-1">
+                  <input
+                    onChange={handleConfirmPassword}
+                   
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
+              
+              </div>    
+              {/* {errors?.passError && <p>{errors.passError}</p>} */}
 
               {errors.generaleError && <p>{errors.generaleError}</p>}
 
