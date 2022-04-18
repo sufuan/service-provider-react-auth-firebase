@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import googlelogo from '../../assets/google.png'
 
@@ -154,15 +154,7 @@ const LOgin = () => {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                  />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                    Remember me
-                  </label>
+                  <Link className="font-medium text-indigo-600 hover:text-indigo-500" to='/register'>Create new account </Link>
                 </div>
 
                 <div className="text-sm">
@@ -198,12 +190,12 @@ const LOgin = () => {
 
                 {/* google login  */}
                 <div>
-                  <button  onClick={() => signInWithGoogle()}
+                  <button onClick={() => signInWithGoogle()}
 
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with Google</span>
-                    <img  className='w-50 h-5' src={googlelogo} alt="" />
+                    <img className='w-50 h-5' src={googlelogo} alt="" />
                   </button>
                 </div>
 
@@ -223,7 +215,7 @@ const LOgin = () => {
 
                 <div>
                   <button disabled
-                 
+
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with GitHub</span>
