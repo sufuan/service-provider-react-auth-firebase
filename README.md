@@ -1,6 +1,6 @@
 # docteo
 
-## [view live site](https://gregarious-banoffee-54e9b6.netlify.app/)
+## [view live site](https://servie-provider-599b4.web.app/)
 
 * stunning homepage
 * doctor booking features 
