@@ -3,6 +3,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-fi
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import googlelogo from '../../assets/google.png'
+import { FirebaseError } from 'firebase/app';
 
 
 const Register = () => {
@@ -19,16 +20,17 @@ const Register = () => {
   })
 
   //  create user hookdeclare 
-  // const [signInWithEmailAndPassword, user, loading, hookerror,] = useSignInWithEmailAndPassword(auth);
   const [
     createUserWithEmailAndPassword,
     user,
     loading,
     hookerror,
   ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification:true});
-
+      // google login hook 
   const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
 
+
+  // handle input form 
   const handleEmail = e => {
 
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)) {
@@ -42,6 +44,7 @@ const Register = () => {
     }
 
   }
+
   const handlePassword = e => {
     if (/.{6,}/.test(e.target.value)) {
       setUserinfo({ ...userInfo, password: e.target.value })
@@ -54,6 +57,7 @@ const Register = () => {
     }
 
   }
+
 
   const handleConfirmPassword = e => {
     if (e.target.value === userInfo.password) {
@@ -68,21 +72,20 @@ const Register = () => {
 
   }
 
+
   const handleLogin = (e) => {
     e.preventDefault()
     createUserWithEmailAndPassword(userInfo.email, userInfo.password)
   }
 
+
+  // custom FirebaseError err msg 
   useEffect(() => {
 
     if (hookerror) {
       switch (hookerror.code) {
-        case 'auth/invalid-email':
-          setErrors({ ...errors, generaleError: 'invalid-email' })
-          break
-        case 'auth/invalid-password':
-          setErrors({ ...errors, generaleError: 'invalid-password' })
-          break
+      
+       
         case 'auth/email-already-in-use':
           setErrors({ ...errors, generaleError: 'email is already registered' })
           break
@@ -100,12 +103,11 @@ const Register = () => {
 
 
 
-      console.log(hookerror)
-      // setErrors({...errors, generaleError:'something went wrong'})
     }
   }, [hookerror])
 
 
+  // redirect after regisr 
   const location = useLocation()
   const navigate = useNavigate()
   const from = location?.state?.from?.pathname || '/'
@@ -138,6 +140,8 @@ const Register = () => {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleLogin}>
+
+              {/* email field  */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email address
@@ -155,6 +159,7 @@ const Register = () => {
                 </div>
                 {errors?.emailError && <p className='text-red-600'>{errors.emailError}</p>}
               </div>
+              
               {/* input password  */}
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">

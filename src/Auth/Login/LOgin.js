@@ -11,15 +11,24 @@ const LOgin = () => {
     email: '',
     password: '',
   })
+
   const [errors, setErrors] = useState({
     emailError: '',
     passError: '',
     generaleError: '',
   })
-  const [signInWithEmailAndPassword, user, loading, hookerror,] = useSignInWithEmailAndPassword(auth);
+
+  const [signInWithEmailAndPassword,
+    user,
+    loading,
+    hookerror,] = useSignInWithEmailAndPassword(auth);
+
+  // google  signin hook 
 
   const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
 
+
+  // handle input field 
   const handleEmail = e => {
 
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)) {
@@ -33,6 +42,8 @@ const LOgin = () => {
     }
 
   }
+
+
   const handlePassword = e => {
     if (/.{6,}/.test(e.target.value)) {
       setUserinfo({ ...userInfo, password: e.target.value })
@@ -45,10 +56,14 @@ const LOgin = () => {
     }
 
   }
+
+
   const handleLogin = (e) => {
     e.preventDefault()
     signInWithEmailAndPassword(userInfo.email, userInfo.password)
   }
+
+  // hookerror for firebase custom msg 
 
   useEffect(() => {
 
@@ -69,7 +84,7 @@ const LOgin = () => {
         case 'auth/internal-error':
           setErrors({ ...errors, generaleError: 'internal error' })
           break
-          case 'auth/network-request-failed':
+        case 'auth/network-request-failed':
           setErrors({ ...errors, generaleError: 'Network error' })
           break
         default:
@@ -79,10 +94,12 @@ const LOgin = () => {
 
 
 
-      console.log(hookerror)
+      // console.log(hookerror)
       // setErrors({...errors, generaleError:'something went wrong'})
     }
   }, [hookerror])
+
+  //  redirect after login 
 
 
   const location = useLocation()
@@ -96,11 +113,15 @@ const LOgin = () => {
     }
   }, [user])
 
+  //  redirect after gogle login 
+
   useEffect(() => {
     if (googleUser) {
       navigate(from)
     }
   }, [googleUser])
+
+
   return (
     <>
 
@@ -117,6 +138,9 @@ const LOgin = () => {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleLogin}>
+ 
+ {/* email input  */}
+
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email address
@@ -135,6 +159,8 @@ const LOgin = () => {
                 {errors?.emailError && <p className='text-red-600'>{errors.emailError}</p>}
               </div>
 
+             {/* pass input  */}
+
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   Password
@@ -150,10 +176,12 @@ const LOgin = () => {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
+
+
                 {errors?.passError && <p className='text-red-600 text-sm'>{errors.passError}</p>}
               </div>
 
-              {errors.generaleError && <p className='text-red-600 text-sm'>{errors.generaleError}</p>}
+                {errors.generaleError && <p className='text-red-600 text-sm'>{errors.generaleError}</p>}
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
@@ -161,9 +189,9 @@ const LOgin = () => {
                 </div>
 
                 <div className="text-sm">
-                  <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+                  <Link to='/' className="font-medium text-indigo-600 hover:text-indigo-500">
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
               </div>
 
